@@ -2,9 +2,6 @@ import React from 'react';
 import './App.css';
 import Movie from './Movie';
 
-
-
-
 class App extends React.Component {
 // Render:   componentWillMount( )   →   render( )   →  componentDidMount( )
 // Update:   componentWillReceiveProps( )   →   shouldComponentUpdate( )   ==  true   →  componentWillUpdate( )   →  render ( )   →  componentDidUpdate( )
