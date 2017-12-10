@@ -2,16 +2,14 @@ import React from 'react';
 import './Movie.css';
 import PropTypes from 'prop-types';
 
-class Movie extends React.Component{
-  render() {
 
-    return(
+function Movie({title, poster}){
+  return(
     <div>
-      <h1>{this.props.title}</h1>
-      <MoviePoster poster={this.props.poster}/>
+      <h1>{title}</h1>
+      <MoviePoster poster={poster}/>
     </div>
-    );
-  }
+  )
 }
 
 Movie.propTypes = {
@@ -19,14 +17,10 @@ Movie.propTypes = {
   poster:PropTypes.string.isRequired
 };
 
-
-
-class MoviePoster extends React.Component {
-  render() {
-    return(
-      <img src={this.props.poster} alt="" />
-    );
-  }
+function MoviePoster({poster}){
+  return(
+    <img src={poster} alt="Movie Poster" />
+  )
 }
 export default Movie
 

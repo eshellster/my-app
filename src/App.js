@@ -6,47 +6,33 @@ class App extends React.Component {
 // Render:   componentWillMount( )   →   render( )   →  componentDidMount( )
 // Update:   componentWillReceiveProps( )   →   shouldComponentUpdate( )   ==  true   →  componentWillUpdate( )   →  render ( )   →  componentDidUpdate( )
 
-  state = {
-  }
+  state = {}
 
-  componentWillMount(){
-  }
 
   componentDidMount(){
-    setTimeout(() => {
-      this.setState({
-        movies : [
-          {
-            title:"Matrix",
-            poster:"https://consequenceofsound.files.wordpress.com/2017/03/the-matrix.png"
-          },
-          {
-            title:"Oldboy",
-            poster:"https://upload.wikimedia.org/wikipedia/en/6/67/Oldboykoreanposter.jpg"
-          },
-          {
-            title:"Star Wars",
-            poster:"http://realorfake4k.com/wp-content/uploads/2017/11/star-wars-last-jedi-4k-uhd-main.jpg"
-          },
-          {
-            title:"Full Metal Jacket",
-            poster:"https://static.rogerebert.com/uploads/movie/movie_poster/full-metal-jacket-1987/large_bleZBRX8XH6e9PR00aGCvdjvu3Q.jpg"
-          },
-          {
-            title:"Batman",
-            poster:"https://images-na.ssl-images-amazon.com/images/I/91b0XWc5rhL._SY445_.jpg"
-          }
-
-        ]
-      })
-    }, 5000)
+    this._getMovies()
   }
 
   _renderMovies = () => {
     const movies = this.state.movies.map((movie, index) => {
-      return <Movie title={movie.title} poster={movie.poster} key={index} />
+      console.log(movie)
+      return <Movie title={movie.title} poster={movie.large_cover_image} key={index} />
     })
     return movies
+  }
+
+
+  _getMovies = async () => {
+    const movies = await this._callApi()
+    this.setState({
+      movies
+    })
+  }
+  _callApi = () => {
+    return fetch("https://yts.am/api/v2/list_movies.json?sort_by=rating")
+    .then(response => response.json())
+    .then(json => json.data.movies)
+    .catch(err => console.log(err))
   }
 
   render() {
@@ -55,6 +41,7 @@ class App extends React.Component {
         {this.state.movies ? this._renderMovies() : 'Loading'}
       </div>
     );
+
   }
 }
 
