@@ -14,7 +14,7 @@ function Movie({title, poster, genres, summary}){
       <div className="Movie__Column">
         <h1>{title}</h1>
         <div className="Movie__genres">
-          {genres.map((genre, index) => <MoviesGenre genre={genre} key={index} /> )}
+          {genres.map((genre, index ,size) => <MoviesGenre genre={genre} index={index} size={size} key={index}/> )}
         </div>
         <div className="Movie__summary">
           <LinesEllipsis
@@ -52,11 +52,22 @@ MoviePoster.propTypes = {
   alt:PropTypes.string.isRequired
 }
 
-function MoviesGenre({genre}){
-  return(
-    <span className="Movie__genre">{genre} </span>
-  )
+
+function MoviesGenre({genre, index, size}){
+  if (index < (size.length-1)) {
+    return(
+      <span className="Movie__genre">{genre},  </span>
+    )
+  }
+  else{
+    return(
+      <span className="Movie__genre">{genre}</span>
+    )
+  }
+
+
 }
+
 MoviesGenre.propTypes = {
   genre:PropTypes.string.isRequired
 }
