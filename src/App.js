@@ -18,7 +18,7 @@ class App extends React.Component {
       console.log(movie);
       return <Movie
         title={movie.title}
-        poster={movie.medium_cover_image}
+        poster={movie.large_cover_image}
         key={movie.id}
         genres={movie.genres}
         rating={movie.rating}
