@@ -64,8 +64,6 @@ function MoviesGenre({genre, index, size}){
       <span className="Movie__genre">{genre}</span>
     )
   }
-
-
 }
 
 MoviesGenre.propTypes = {
